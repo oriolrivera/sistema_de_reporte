@@ -1,0 +1,218 @@
+<!DOCTYPE HTML>
+<html lang="es">
+		<head>
+			<meta charset="UTF-8">
+			<title>LOOKUP</title>
+
+   	      <link rel="stylesheet" href="<?php echo Conectar::ruta();?>public/css/bootstrap.css">
+	      <link rel="stylesheet" href="<?php echo Conectar::ruta();?>public/css/style.css">
+	      <link rel="stylesheet" type="text/css" href="<?php echo Conectar::ruta(); ?>public/css/demo_page.css">
+          <link rel="stylesheet" type="text/css" href="<?php echo Conectar::ruta(); ?>public/css/demo_table.css">
+
+
+	      <script type="text/javascript" src="<?php echo Conectar::ruta();?>public/js/jquery-1.8.3.js"></script>
+	      <script type="text/javascript" src="<?php echo Conectar::ruta();?>public/js/bootstrap.js"></script>
+
+	      <script type="text/javascript" src="<?php echo Conectar::ruta();?>public/js/jquery.dataTables.min.js"></script>
+	      <script type="text/javascript" src="<?php echo Conectar::ruta();?>public/js/funciones.js"></script>
+
+
+
+		</head>
+
+		<body>
+
+      <?php include("menu.phtml"); ?>
+
+			       <div class="container">
+
+           <div class="row">
+             <div class="span12">
+              <h2>LOOKUP</h2>
+
+              <div class="add span4">
+
+                   <a href="<?php echo Conectar::ruta();?>?accion=add-data" title="Crear Persona"><img src="<?php echo Conectar::ruta();?>public/img/add.png" alt="Crear Persona" >
+                       <small>Crear Persona</small>
+                     </a>
+
+                     <a href="javascript:void(0);" onclick="eliminar()">
+                          <img src="<?php echo Conectar::ruta();?>public/img/close.png" alt="delete" title="Borrar Selección"><small>Eliminar Selección</small>
+                         </a>
+
+              </div>
+
+           <div class="span8">
+                     <?php
+                    if (isset($_GET["m"])) {
+
+                       switch ($_GET["m"]) {
+                         case '1':
+
+                          ?>
+                          <div class="alert alert-error center">
+                            <button class="close" data-dismiss="alert">x</button>
+
+                            <b>Seleccione una persona para eliminar</b>
+                          </div>
+
+                         <?php
+
+                        break;
+
+                        case '2':
+
+                         ?>
+                          <div class="alert alert-success center">
+                            <button class="close" data-dismiss="alert">x</button>
+
+                            <b>Selección eliminada con exito</b>
+                          </div>
+
+                         <?php
+
+                        break;
+
+
+
+                          }
+                        }
+
+
+
+                         ?>
+
+              </div>
+
+
+
+          <div id="todosEmpre">
+            <form action="<?php echo Conectar::ruta();?>?accion=delete" method="post" name="form">
+                  <table cellpadding="0" cellspacing="0" border="0" class="display table table-hover" id="tabla">
+                    <thead>
+                      <tr>
+
+                        <th>ID</th>
+                        <th>Foto</th>
+                        <th>Nombre / Apellido</th>
+                        <th>Nacionalidad</th>
+                        <th>Observación</th>
+                        <th>Fecha</th>
+                        <th>Estado</th>
+                        <th>
+                        	Editar
+                          </th>
+                        <th>
+
+                          <input type="checkbox"  id="checkAll" onclick="checkTodos(this.id,'todosEmpre');" name="checkAll" title="Seleccinar todo">
+                        </th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+
+
+                            <?php for ($i=0; $i < sizeof($view); $i++) {
+                              ?>
+                                    <tr>
+                                      <td>
+                                           <?php echo $view[$i]["id_persona"]; ?>
+                                      </td>
+
+                                       <td>
+                                          <?php
+
+                                             if (!empty($view[$i]["foto"])=="") {
+                                              ?>
+
+                                               <img src="<?php echo Conectar::ruta(); ?>../public/foto/perfil.png" alt="">
+                                               <?php
+
+                                             }else{
+                                              ?>
+
+                                                <img src="<?php echo Conectar::ruta(); ?>../public/foto/<?php echo $view[$i]["foto"];?>" alt="">
+
+                                               <?php
+
+                                             }
+
+                                           ?>
+                                      </td>
+
+                                       <td>
+                                             <?php echo $view[$i]["nombre"]; ?>
+                                      </td>
+
+                                       <td>
+                                             <?php echo $view[$i]["nacionalidad"]; ?>
+                                      </td>
+                                       <td>
+
+                                        <?php echo $view[$i]["observacion"]; ?>
+
+
+                                      </td>
+
+                                      <td>
+
+                                       <small> <?php echo $view[$i]["fecha"]; ?></small>
+
+
+                                      </td>
+
+                                      <!-- ******************************************************** -->
+
+                                       <td>
+                                             <?php
+                                                   echo $view[$i]["estado"];
+
+                                               ?>
+                                      </td>
+                                       <td>
+                                            <a href="<?php echo Conectar::ruta();?>?accion=edit&data=<?php echo base64_encode($view[$i]["id_persona"]) ?>&en=<?php echo md5('dsfsdfdsfdsfds') ?>">
+
+                                            <img src="<?php echo Conectar::ruta();?>public/img/edit16.png" alt="edit" title="Editar Selección">
+
+                                             </a>
+
+
+                                      </td>
+
+                                       <td>
+                                            <input type="checkbox" name="delete[]" value="<?php echo $view[$i]["id_persona"]; ?>">
+
+
+                                            <input type="hidden" name="g" value="s">
+                                      </td>
+                                    </tr>
+
+                                <?php
+                                       }
+                            ?>
+
+
+
+                            </form>
+
+                    </tbody>
+
+                  </table>
+
+             </div><!-- end todosEmpre -->
+
+
+
+             </div>
+           </div>
+
+       </div><!--  end container -->
+
+
+
+
+
+		</body>
+
+
+</html>

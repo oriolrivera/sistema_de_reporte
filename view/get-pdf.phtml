@@ -1,0 +1,90 @@
+<style type="text/css">
+<!--
+table { vertical-align: top; }
+tr    { vertical-align: top; }
+td    { vertical-align: top; }
+}
+-->
+</style>
+<page backcolor="#FEFEFE" backimg="" backimgx="center" backimgy="bottom" backimgw="100%" backtop="0" backbottom="30mm" footer="date;heure;page" style="font-size: 12pt">
+    <bookmark title="Lettre" level="0" ></bookmark>
+    <table cellspacing="0" style="width: 100%; text-align: center; font-size: 14px">
+        <tr>
+            <td style="width: 75%;">
+            </td>
+            <td style="width: 25%; color: #444444;">
+                <!-- <img style="width: 100%;" src="./res/logo.gif" alt="Logo"><br> -->
+                REPORTE DE SISTEMA LOOKUP
+            </td>
+        </tr>
+    </table>
+    <br>
+    <br>
+    <table cellspacing="0" style="width: 100%; text-align: left;font-size: 10pt">
+        <tr>
+            <td style="width:50%;"></td>
+            <td style="width:50%; ">Fecha <?php echo date('d/m/Y'); ?></td>
+        </tr>
+    </table>
+    <br>
+
+    <table cellspacing="0" style="width: 100%; border: solid 1px black; background: #1F2A34; color:#FFF; text-align: center; font-size: 8pt;">
+        <tr>
+            <th style="width: 10%">Nombre</th>
+            <th style="width: 10%">Apellido</th>
+            <th style="width: 10%">Nacionalidad</th>
+            <th style="width: 10%">Fecha nacimiento</th>
+            <th style="width: 10%">Cedula y/o pasaporte</th>
+            <th style="width: 18%">Observación</th>
+            <th style="width: 12%">Responsable</th>
+            <th style="width: 10%">Tel responsble</th>
+            <th style="width: 10%">Cel responsble</th>
+
+        </tr>
+    </table>
+
+    <table cellspacing="0" border="1" style="width: 100%; border: solid 1px black; background: #F5F5F5; text-align: center; font-size: 7pt; padding:10px">
+        <?php
+         require_once("model/viewModel.php");
+          $obj = new viewPeople();
+          $view=$obj->GetRepor();
+         for ($i=0; $i < sizeof($view); $i++) {
+
+         ?>
+        <tr>
+            <td style="width: 10%;"><?php echo $view[$i]["nombre"]; ?></td>
+            <td style="width: 10%;"><?php echo $view[$i]["apellido"]; ?></td>
+            
+            <td style="width: 10%;"><?php echo $view[$i]["nacionalidad"]; ?></td>
+            <td style="width: 10%;"><?php echo $view[$i]["fecha_nacimiento"]; ?></td>
+            <td style="width: 10%;" ><?php echo $view[$i]["cedula_pasaporte"]; ?></td>
+            <td style="width: 18%; text-align:justify"><?php echo $view[$i]["observacion"]; ?></td>
+            <td style="width: 12%;"><?php echo $view[$i]["responsable"]; ?></td>
+            <td style="width: 10%;"><?php echo $view[$i]["tel1"]; ?></td>
+            <td style="width: 10%;"><?php echo $view[$i]["tel2"]; ?></td>
+
+        </tr>
+
+        <?php } ?>
+    </table>
+
+
+    <br>
+
+    <nobreak>
+        <br>
+        Algun detalle.<br>
+        <br>
+        <table cellspacing="0" style="width: 100%; text-align: left; font-size: 7pt;">
+            <tr>
+                <td style="width:50%;"></td>
+                <td style="width:50%; ">
+                    NOMBRE EMPRESA<br>
+                    SERVICIOS<br>
+                    Tel : (809)444-4444<br>
+                    Email : MAIL@EJEMPLO.COM<br>
+                </td>
+            </tr>
+        </table>
+    </nobreak>
+</page>

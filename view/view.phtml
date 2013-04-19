@@ -1,0 +1,138 @@
+<!DOCTYPE HTML>
+<html lang="es">
+		<head>
+			<meta charset="UTF-8">
+
+
+	<title>Datos de <?php echo $view[0]["nombre"]; ?></title>
+
+</head>
+
+          <link rel="stylesheet" href="<?php echo Conectar::ruta();?>public/css/bootstrap.css">
+	      <link rel="stylesheet" href="<?php echo Conectar::ruta();?>public/css/style.css">
+	      <link rel="stylesheet" type="text/css" href="<?php echo Conectar::ruta(); ?>public/css/demo_page.css">
+          <link rel="stylesheet" type="text/css" href="<?php echo Conectar::ruta(); ?>public/css/demo_table.css">
+
+
+	      <script type="text/javascript" src="<?php echo Conectar::ruta();?>public/js/jquery-1.8.3.js"></script>
+	      <script type="text/javascript" src="<?php echo Conectar::ruta();?>public/js/bootstrap.js"></script>
+
+
+			<body>
+
+
+                     <div class="container">
+
+                          <div class="row">
+
+                            <center style="padding:30px;">
+                          	      <?php
+
+                                             if (!empty($view[0]["foto"])=="") {
+                                              ?>
+
+                                               <img src="<?php echo Conectar::ruta(); ?>/public/foto/perfil.png" alt="">
+                                               <?php
+
+                                             }else{
+                                              ?>
+
+                                                <img src="<?php echo Conectar::ruta(); ?>/public/foto/<?php echo $view[0]["foto"];?>" alt="">
+
+                                               <?php
+
+                                             }
+
+                                           ?>
+
+                          	</center>
+
+                          	<div class="span3 back">
+                          			<a href="<?php echo Conectar::ruta();?>"><img src="<?php echo Conectar::ruta();?>public/img/back.png" title="Salir" alt="Salir"></a>
+                          	</div>
+
+
+
+								<table class="table">
+
+				                      <thead>
+
+				                         <tr> <th>Nombre:</th>
+				                         	 <td><?php echo $view[0]["nombre"]; ?></td>
+
+				                         </tr>
+
+
+				                          <tr><th>Apellido:</th>
+				                          	      <td><?php echo $view[0]["apellido"]; ?></td>
+
+				                          </tr>
+
+
+				                          <tr><th>Nacionalidad:</th>
+				                          	   <td><?php echo $view[0]["nacionalidad"]; ?></td>
+
+				                          </tr>
+
+				                          <tr><th>Fecha nacimiento:</th>
+				                          	       <td><?php echo $view[0]["fecha_nacimiento"]; ?></td>
+
+				                          </tr>
+
+				                          <tr><th>Cedula y/o pasaporte:</th>
+				                          	  <td><?php echo $view[0]["cedula_pasaporte"]; ?></td>
+
+				                          </tr>
+
+				                          <tr><th>Observación:</th>
+
+				                          	   <td><?php echo $view[0]["observacion"]; ?>
+				                          	   </td>
+
+				                          </tr>
+
+				                           <tr><th>Responsable:</th>
+
+				                          	   <td><?php echo $view[0]["responsable"]; ?>
+				                          	   </td>
+
+				                          </tr>
+
+				                           <tr><th>Teléfono responsable:</th>
+
+				                          	   <td><?php echo $view[0]["tel1"]; ?>
+				                          	   </td>
+
+				                          </tr>
+
+				                            <tr><th>Celular responsable:</th>
+
+				                          	   <td><?php echo $view[0]["tel2"]; ?>
+				                          	   </td>
+
+				                          </tr>
+
+				                      </thead>
+
+								</table>
+
+								<a href="<?php echo Conectar::ruta();?>?accion=pdf&data=<?php echo base64_encode($view[0]["id_persona"]) ?>&en=<?php echo md5('dsfsdfdsfdsfds') ?>" class="btn btn-primary">Exportar a PDF</a>
+
+       					 </div>
+
+                     </div>
+
+                     <footer class="modal-footer" style="margin-top:20px">
+
+
+
+                     </footer>
+
+
+
+
+			</body>
+
+
+
+</html>

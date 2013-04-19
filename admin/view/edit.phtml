@@ -1,0 +1,335 @@
+
+<!DOCTYPE HTML>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title>Crear Persona</title>
+
+
+      <link rel="stylesheet" href="<?php echo Conectar::ruta();?>public/css/bootstrap.css">
+      <link rel="stylesheet" href="<?php echo Conectar::ruta();?>public/css/style.css">
+
+      <link rel="stylesheet" type="text/css" href="<?php echo Conectar::ruta(); ?>public/css/demo_page.css">
+            <link rel="stylesheet" type="text/css" href="<?php echo Conectar::ruta(); ?>public/css/demo_table.css">
+
+            <link href="<?php echo Conectar::ruta(); ?>public/css/jquery.si.css" rel="stylesheet" type="text/css" />
+
+            <link href="<?php echo Conectar::ruta(); ?>public/css/pepper-grinder/jquery-ui-1.8.19.custom.css" rel="stylesheet" type="text/css" />
+
+
+      <script type="text/javascript" src="<?php echo Conectar::ruta();?>public/js/jquery-1.8.3.js"></script>
+
+            <script type="text/javascript" language="javascript" src="<?php echo Conectar::ruta();?>public/js/jquery.maskedinput-1.3.min.js" ></script>
+      <script type="text/javascript" language="javascript" src="<?php echo Conectar::ruta();?>public/js/jquery-ui-1.8.19.custom.min.js" ></script>
+      <script type="text/javascript" language="javascript" src="<?php echo Conectar::ruta();?>public/js/jquery.ui.datepicker-es.js" ></script>
+
+
+      <script type="text/javascript" src="<?php echo Conectar::ruta();?>public/js/bootstrap.js"></script>
+      <script type="text/javascript" src="<?php echo Conectar::ruta();?>public/js/bootstrap-dropdown.js"></script>
+      <script type="text/javascript" src="<?php echo Conectar::ruta();?>public/js/funciones.js"></script>
+      <script type="text/javascript" src="<?php echo Conectar::ruta();?>public/js/jquery.dataTables.min.js"></script>
+      <script src="<?php echo Conectar::ruta(); ?>public/js/jquery.si.js" type="text/javascript"></script>
+
+
+
+
+
+
+
+
+</head>
+
+<body>
+
+<?php include("menu.phtml"); ?>
+
+
+
+
+       <div class="container head">
+
+          <div class="row">
+
+            <div class="span3 imgW">
+
+
+
+
+              <?php
+
+                 if (!empty($view[0]["foto"])=="") {
+                  ?>
+
+                   <img src="<?php echo Conectar::ruta(); ?>../public/foto/perfil.png" alt="">
+                   <?php
+
+                 }else{
+                  ?>
+
+                    <img src="<?php echo Conectar::ruta(); ?>../public/foto/<?php echo $view[0]["foto"];?>" alt="">
+
+                   <?php
+
+                 }
+
+               ?>
+
+
+            </div>
+
+
+            <div class="span9">
+
+
+              <div class="back">
+
+                     <a href="<?php echo Conectar::ruta(); ?>"><img src="<?php echo Conectar::ruta();?>public/img/back.png" alt="Atras" >
+
+                     </a>
+
+                 </div>
+
+          <?php
+              if (isset($_GET["m"])) {
+
+                 switch ($_GET["m"]) {
+                   case '1':
+
+                    ?>
+                    <div class="alert alert-error center">
+                      <button class="close" data-dismiss="alert">x</button>
+
+                      <b>Los campos con  asteriscos son obligatorios</b>
+                    </div>
+
+                    <?php
+
+                  break;
+
+                  case '2':
+
+                  ?>
+
+                   <div class="alert alert-error center">
+                        <button class="close" data-dismiss="alert">x</button>
+                        <b>Selecione una foto para crear datos de persona</b>
+                   </div>
+
+                  <?php
+
+                  break;
+
+                   case '3':
+
+                  ?>
+
+                   <div class="alert alert-error center">
+                        <button class="close" data-dismiss="alert">x</button>
+                        <b>La foto seleccionada tiene que estar en el formato jpg o png.</b>
+                   </div>
+
+                   <?php
+
+                  break;
+
+                   case '4':
+
+                  ?>
+
+                   <div class="alert alert-success center">
+                        <button class="close" data-dismiss="alert">x</button>
+                        <b>Datos editados con exito
+                        </b>
+                   </div>
+
+                   <?php
+
+                  break;
+
+
+
+
+
+
+                 }//end switch
+
+
+            }//end if
+
+         ?>  
+
+         <h2>Editar datos de persona</h2>
+
+              <form action="" method="post" class="form-horizontal" enctype="multipart/form-data">
+
+
+
+
+
+                      <div class="control-group">
+                        <label for="nom_ape" class="control-label">Nombre</label>
+                            <div class="controls">
+                                <input type="text" id="nom_ape" name="nom_ape" class="input-xlarge" value="<?php echo $view[0]["nombre"]; ?>"><span class="asterisk">*</span>
+                            </div>
+                      </div>
+
+                      <div class="control-group">
+                        <label for="ape_ape" class="control-label">Apellido</label>
+                            <div class="controls">
+                                <input type="text" id="ape_ape" name="ape_ape" class="input-xlarge" value="<?php echo $view[0]["apellido"]; ?>">
+                            </div>
+                      </div>
+
+
+
+
+                      
+
+                      <div class="control-group">
+                          <label for="nac" class="control-label">Nacionalidad</label>
+                             <div class="controls">
+                               <input type="text" id="nac" name="nac" class="input-xlarge" value="<?php echo $view[0]["nacionalidad"]; ?>">
+                               
+                            </div>
+                      </div>
+
+                         <div class="control-group">
+                          <label for="fec_nac" class="control-label">Fecha nacimiento</label>
+                             <div class="controls">
+                               <input type="text" id="fec_nac" name="fec_nac" class="input-xlarge" value="<?php echo $view[0]["fecha_nacimiento"]; ?>">
+                               
+                            </div>
+                      </div>
+
+
+                       <div class="control-group">
+                          <label for="ced_pas" class="control-label">Cedula y/o pasaporte</label>
+                             <div class="controls">
+                               <input type="text" id="ced_pas" name="ced_pas" class="input-xlarge" value="<?php echo $view[0]["cedula_pasaporte"]; ?>">
+                               
+                            </div>
+                      </div>
+
+
+
+
+                      <div class="control-group">
+                          <label for="obser" class="control-label">Observación</label>
+                             <div class="controls">
+                               <input type="text" id="obser" name="obser" class="input-xlarge" value="<?php echo $view[0]["observacion"]; ?>">
+                            </div>
+                      </div>
+
+                      <div class="control-group">
+                          <label for="respons" class="control-label">Responsable</label>
+                             <div class="controls">
+                               <input type="text" id="respons" name="respons" class="input-xlarge" value="<?php echo $view[0]["responsable"]; ?>">
+                            </div>
+                      </div>
+
+                       <div class="control-group">
+                          <label for="tel_res1" class="control-label">Telefono responsable</label>
+                             <div class="controls">
+                               <input type="text" id="tel_res1" name="tel_res1" class="input-xlarge"value="<?php echo $view[0]["tel1"]; ?>">
+                            </div>
+                      </div>
+
+                      <div class="control-group">
+                          <label for="tel_res2" class="control-label">Celular responsable</label>
+                             <div class="controls">
+                               <input type="text" id="tel_res2" name="tel_res2" class="input-xlarge"value="<?php echo $view[0]["tel2"]; ?>">
+                            </div>
+                      </div>
+
+                      <div class="control-group">
+                          <label for="estado" class="control-label">Estado</label>
+                            <div class="controls">
+                               <select name="estado" id="estado">
+
+                                <?php
+                                      //$ViewEventEd=$obj->viewEventEditPorId();
+
+                                for ($i=0; $i < sizeof($view); $i++) {
+
+                               	    // if ($ViewEventEd[$i]["id_empresa"] == $viewEdit[0]["id_empresa_evento"]) {
+                                	if ($view[$i]["id_persona"] == base64_decode($_GET["data"])) {
+                                           switch ($view[$i]["estado"]) {
+                                           	case 'ACTIVO':
+                                           	?>
+                                           		   <option value="<?php echo $view[$i]["estado"] ?>" selected="selected"><?php echo $view[$i]["estado"] ?></option>
+
+                                           		  <option value="PASIVO">PASIVO</option>
+
+                                           		  <?php
+                                           		break;
+
+                                           		case 'PASIVO':
+                                           		?>
+                                                     <option value="ACTIVO">ACTIVO</option>
+                                           		     <option value="<?php echo $view[$i]["estado"] ?>" selected="selected"><?php echo $view[$i]["estado"] ?></option>
+
+
+
+                                           		  <?php
+
+                                           		break;
+
+
+                                           }
+
+                                    		?>
+
+
+
+
+
+
+
+                              <?php
+
+
+                               	   }
+
+                                  }
+                               ?>
+
+                               </select>
+                               <span class="asterisk">*</span>
+                             </div>
+                      </div>
+
+
+                      <div class="control-group">
+                        <label for="foto_acre" class="control-label">Foto</label>
+                           <div class="controls">
+                             <input type="file" id="foto_per" name="foto_per" class="file">
+                             <span class="asterisk">*</span>
+                          </div>
+                      </div>
+
+
+
+                      <input type="hidden" name="g" value="s">
+                      
+                      <div class="controls">
+                         <input type="submit" class="btn btn-inverse" value="Guardar cambios">
+                      </div>
+
+
+              </form>
+
+
+            </div> <!-- end span9 -->
+
+
+          </div><!-- end row -->
+
+
+       </div><!--  end container -->
+
+
+
+</body>
+
+
+</html>

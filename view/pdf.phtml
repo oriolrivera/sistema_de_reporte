@@ -1,0 +1,181 @@
+<?php
+
+
+require_once('lib/fpdf.php');
+
+class PDF extends FPDF
+{
+//Cabecera de página
+public function Header()
+{
+    //Logo
+
+
+    $obj = new viewPeople();
+
+if (!isset($_GET["data"]) or !isset($_GET["en"])) {
+	 header("Location:".Conectar::ruta()."?accion=index");
+}else{
+
+	$view=$obj->GetView($_GET["data"]);
+
+	 if (!$_GET["data"]==$view) {
+	 	header("Location:".Conectar::ruta()."?accion=index");
+
+		exit;
+	 }
+
+	 }
+
+    
+
+
+
+         if (!empty($view[0]["foto"])=="") {
+    
+
+           $foto="public/foto/perfil.png";
+     
+
+         }else{
+      
+
+           $foto="public/foto/".$view[0]["foto"];
+
+         
+
+         }
+
+                                         
+
+
+    $this->Image($foto,20,8,32);
+
+    //$this->Image('img/logo_pb.png',30,10);
+    //Arial bold 15
+    $this->SetFont('Arial','B',15);
+    //Movernos a la derecha
+    $this->Cell(80);
+    //Título
+    //$this->Cell(30,10,'Título titu',1,0,'C');
+    //Salto de línea
+    $this->Ln(20);
+}
+
+//Pie de página
+function Footer()
+{
+    //Posición: a 1,5 cm del final
+    $this->SetY(-15);
+    //Arial italic 8
+    $this->SetFont('Arial','I',8);
+    //Número de página
+    $this->Cell(0,10,'Page '.$this->PageNo().'/{nb}',0,0,'C');
+}
+
+}
+
+//Creación del objeto de la clase heredada
+$pdf=new PDF();
+$pdf->AliasNbPages();
+$pdf->AddPage();
+$b=$pdf->SetFont('Times','B',12);
+//for($i=1;$i<=40;$i++)
+   //$pdf->Cell(0,10,'Imprimiendo línea número',0,1);
+
+
+$view=$obj->GetView($_GET["data"]);
+
+ $nom = $view[0]["nombre"];
+ $id  = $view[0]["id_persona"];
+ $ape = $view[0]["apellido"];
+ $nac = $view[0]["nacionalidad"];
+ $fec = $view[0]["fecha_nacimiento"];
+ $ced = $view[0]["cedula_pasaporte"];
+ $obser = $view[0]["observacion"];
+ $resp = $view[0]["responsable"];
+ $tel1_resp = $view[0]["tel1"];
+ $tel2_resp = $view[0]["tel2"];
+
+
+
+
+$pdf->Cell(40,40,'NOMBRE:');
+$pdf->SetFont('Times','',12);
+$pdf->Cell(80,40,utf8_decode($nom),0,1,'C');
+
+$pdf->Ln(1);
+
+$b=$pdf->SetFont('Times','B',12);
+$b=$pdf->Cell(40,5,'APELLIDO:');
+$pdf->SetFont('Times','',12);
+$pdf->Cell(85,5,utf8_decode($ape),0,1,'C');
+
+$pdf->Ln(1);
+
+
+
+$b=$pdf->SetFont('Times','B',12);
+$b=$pdf->Cell(40,40,'NACIONALIDAD:');
+
+$pdf->SetFont('Times','',12);
+$pdf->Cell(80,40,utf8_decode($nac),0,1,'C');
+
+$pdf->Ln(1);
+
+$b=$pdf->SetFont('Times','B',12);
+$b=$pdf->Cell(40,40,'FECHA NACIMIENTO:');
+
+$pdf->SetFont('Times','',12);
+$pdf->Cell(80,40,$fec,0,1,'C');
+
+$pdf->Ln(1);
+
+$b=$pdf->SetFont('Times','B',12);
+$b=$pdf->Cell(40,30,'CEDULA Y/O PASAPORTE:');
+
+$pdf->SetFont('Times','',12);
+$pdf->Cell(80,30,$ced,0,1,'C');
+
+
+$pdf->Ln(1);
+
+$b=$pdf->SetFont('Times','B',12);
+$b=$pdf->Cell(40,30,'OBSERVACION:');
+$pdf->SetFont('Times','',12);
+$pdf->MultiCell(0,5,utf8_decode($obser));
+
+$pdf->Ln(1);
+
+$b=$pdf->SetFont('Times','B',12);
+$b=$pdf->Cell(40,80,'RESPONSABLE:');
+$pdf->SetFont('Times','',12);
+$pdf->Cell(40,80,utf8_decode($resp),0,1,'C');
+
+
+$pdf->Ln(1);
+
+$b=$pdf->SetFont('Times','B',12);
+$b=$pdf->Cell(40,-20,'TEL RESPONSABLE:');
+$pdf->SetFont('Times','',12);
+$pdf->Cell(40,-20,utf8_decode($tel1_resp),0,1,'C');
+
+$pdf->Ln(1);
+
+$b=$pdf->SetFont('Times','B',12);
+$b=$pdf->Cell(40,80,'CEL RESPONSABLE:');
+$pdf->SetFont('Times','',12);
+$pdf->Cell(40,80,utf8_decode($tel2_resp),0,1,'C');
+
+
+
+
+$nom1 = str_replace(" ", "-", $view[0]["nombre"]);
+$ape1 = str_replace(" ", "-", $view[0]["apellido"]);
+
+$pdf->Output($nom1.'-'.$ape1.'-'.$id.'.pdf', 'D');
+
+
+
+
+ ?>
