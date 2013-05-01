@@ -4,16 +4,14 @@
     class viewPeople extends Conectar
           {
 
-              public function __construct()
+                     public function __construct()
 				   	{
 
-				      $this->viewP=array();
-				      $this->viewEdit=array();
-				      $this->viewRepor=array();
-
-
-
-				   	}//end construct
+			      $this->viewP=array();
+			      $this->viewEdit=array();
+			      $this->viewRepor=array();
+		
+		   	}//end construct
 
 
 
