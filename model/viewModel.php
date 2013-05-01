@@ -72,7 +72,7 @@
 			   	}//end GetViewEdit
 
 
-               public function GetRepor(){
+                            public function GetRepor(){
 
 
 			        parent::con();
